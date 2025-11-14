@@ -1,228 +1,244 @@
 # ScoutAI - AI-Powered Talent Sourcing Platform
 
-ScoutAI helps recruiters and hiring managers quickly find and evaluate top talent by automating the search and screening process using advanced AI.
+🤖 **AI-Driven Recruitment Automation**
+
+ScoutAI is an advanced talent sourcing platform that leverages artificial intelligence to help recruiters and hiring managers quickly find, evaluate, and engage top talent. By automating the search and screening process, ScoutAI dramatically reduces time-to-hire and improves candidate quality.
 
 ![ScoutAI Logo](./Client/public/logo.png)
 
-## Features
+## 🚀 Key Features
 
-- **AI-Powered Search**: Transform natural language queries into precise searches for candidates
-- **Automated Candidate Screening**: Filter and score candidates based on your specific requirements
-- **LinkedIn Profile Scraping**: Get detailed candidate information from LinkedIn profiles
-- **Match Analysis**: Understand why a candidate might be a good fit for your role
-- **Personalized Outreach**: AI-generated outreach messages tailored to each candidate
-- **Search History**: Track and revisit previous talent searches
-- **Detailed Profiles**: View comprehensive candidate profiles with experience, skills, education and more
+- **🔍 AI-Powered Natural Language Search** - Transform natural language queries into precise candidate searches
+- **⚡ Automated Candidate Screening** - Filter and score candidates against your specific requirements
+- **📊 LinkedIn Profile Integration** - Scrape detailed candidate information directly from LinkedIn profiles
+- **🎯 Smart Match Analysis** - Understand fit metrics and why candidates align with your role
+- **✉️ Personalized Outreach** - AI-generated tailored messages for each candidate
+- **📝 Search History** - Track and revisit previous talent searches
+- **👥 Comprehensive Profiles** - View full candidate profiles with experience, skills, education, and more
+- **🚩 Background Check Integration** - Automated flagging of potential issues
+- **❓ Prescreening Questions** - AI-generated questions specific to each candidate
 
-## Architecture
+## 🏗️ Architecture Overview
 
-The application follows a client-server architecture with multiple AI-powered processing steps:
+ScoutAI follows a sophisticated **client-server architecture** with multiple AI-powered processing layers:
 
-![ScoutAI Architecture](./docs/architecture-diagram.png)
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        React Frontend                       │
+│                      (User Interface)                       │
+└────────────────────┬────────────────────────────────────────┘
+                     │
+┌────────────────────▼────────────────────────────────────────┐
+│                   Express.js Backend                        │
+│              (Orchestration & Processing)                  │
+└────────────────────┬────────────────────────────────────────┘
+                     │
+        ┌────────────┼────────────┐
+        │            │            │
+   ┌────▼──┐  ┌─────▼─────┐  ┌──▼────┐
+   │ Gemini│  │  SerpAPI  │  │ Apify │
+   │  LLM  │  │ (Search)  │  │(LinkedIn)│
+   └────────┘  └───────────┘  └────────┘
+        │            │            │
+        └────────────┼────────────┘
+                     │
+        ┌────────────▼────────────┐
+        │  Firestore + Vector DB  │
+        │   (Data Persistence)    │
+        └─────────────────────────┘
+```
 
-### Core Process Flow:
+## 🔄 Core Process Flow
 
-1. **Query Processing**:
-   - User submits a natural language query
-   - Gemini AI transforms the query into structured search parameters
+### 1. **Query Processing** 🔎
+- User submits a natural language query (e.g., "Senior React developers in Bangalore with 5+ years experience")
+- Gemini AI parses and transforms the query into structured search parameters
+- Context extraction for location, skills, experience level, and specializations
 
-2. **Candidate Discovery**:
-   - System executes multiple search queries via SerpAPI
-   - Initial candidate profiles are identified from search results
+### 2. **Candidate Discovery** 🌐
+- System executes multiple search queries via SerpAPI
+- Crawls search results to identify candidate profiles
+- Initial candidate list compiled from various sources
 
-3. **Data Enrichment**:
-   - LinkedIn profiles are scraped using Apify
-   - Profile data is structured and enhanced
+### 3. **Data Enrichment** 📈
+- LinkedIn profiles are automatically scraped using Apify
+- Profile data is structured and standardized
+- Extract experience, education, skills, endorsements, and recommendations
 
-4. **Vector Database Storage**:
-   - Candidate profiles are embedded as vectors
-   - Profiles stored in Firestore with vector embeddings for similarity search
+### 4. **Vector Database Storage** 🗄️
+- Candidate profiles are converted to vector embeddings
+- Embeddings stored in Firestore with full profile data
+- Enables semantic similarity search and intelligent retrieval
 
-5. **Candidate Analysis**:
-   - Candidates are scored against the original query
-   - AI generates prescreening questions specific to each candidate
-   - Background check flags are created if issues are detected
-   - Personalized outreach messages are generated for each candidate
+### 5. **Candidate Analysis & Scoring** 🎯
+- Candidates ranked against original job requirements
+- AI generates prescreening questions specific to each candidate
+- Background check flags created if issues detected
+- Personalized outreach messages generated for engagement
 
-6. **Result Delivery**:
-   - Ranked candidate list presented to the user
-   - Detailed candidate profiles with all analysis available for review
+### 6. **Results Delivery** 📋
+- Ranked candidate list presented with confidence scores
+- Detailed profiles with all analysis available
+- Ready-to-send personalized outreach messages
 
-### System Components:
-
-1. **Client**: React application that handles user interface and interactions
-2. **API Server**: Express.js server that coordinates the AI-powered search process
-3. **Database**: Firestore for storing user data, search history, and candidate profiles
-4. **AI Services**:
-   - Gemini for generating search queries and analyzing candidate profiles
-   - SerpAPI for executing web searches
-   - Apify for LinkedIn profile scraping
-
-## Tech Stack
+## 🛠️ Tech Stack
 
 ### Frontend
-- React.js with React Router for client-side routing
-- Tailwind CSS for styling
-- Axios for API requests
-- Context API for state management
+- **React** - UI framework for building interactive components
+- **Modern JavaScript** - ES6+ with dynamic features
+- **Responsive Design** - Mobile-friendly interface
 
 ### Backend
-- Node.js with Express for the API server
-- Firebase/Firestore for database and authentication
-- Google Gemini for natural language processing
-- SerpAPI for searching candidate profiles
-- Apify for LinkedIn profile scraping
+- **Express.js** - Node.js web framework for API development
+- **REST APIs** - RESTful endpoints for frontend communication
+- **WebSockets** - Real-time updates during processing
 
-## Getting Started
+### AI & Data
+- **Google Gemini API** - LLM for intelligent query processing and analysis
+- **SerpAPI** - Web search integration
+- **Apify** - LinkedIn profile scraping
+- **Vector Embeddings** - Semantic search capability
+
+### Database & Storage
+- **Firebase Firestore** - Real-time NoSQL database
+- **Vector Search** - Semantic similarity matching
+- **Authentication** - Firebase Auth integration
+
+### Languages & Tools
+- **JavaScript/Node.js** - Backend runtime
+- **SQL/NoSQL** - Data querying
+
+## 📦 Project Structure
+
+```
+ScoutAI/
+├── Client/                      # React frontend
+│   ├── public/
+│   │   └── logo.png
+│   ├── src/
+│   │   ├── components/          # React components
+│   │   ├── pages/               # Page components
+│   │   └── App.jsx
+│   └── package.json
+├── Backend/                     # Express.js server
+│   ├── routes/                  # API endpoints
+│   ├── controllers/             # Business logic
+│   ├── services/                # AI & external services
+│   ├── config/                  # Configuration files
+│   └── server.js
+├── docs/                        # Documentation
+│   └── architecture-diagram.png
+├── .env.example                 # Environment variables template
+└── README.md
+```
+
+## 🚀 Getting Started
 
 ### Prerequisites
-
-- Node.js v16 or higher
+- Node.js v14 or higher
 - npm or yarn
-- Firebase account and project
-- API keys for:
-  - Google AI (Gemini)
-  - SerpAPI
-  - Apify
+- Firebase account with Firestore setup
+- Google Gemini API key
+- SerpAPI key
+- Apify account
 
 ### Installation
 
-1. Clone the repository
+1. **Clone the Repository**
 ```bash
-git clone https://github.com/yourusername/ScoutAI.git
+git clone https://github.com/mugilan-sakthivel/ScoutAI.git
 cd ScoutAI
 ```
 
-2. Install dependencies for both frontend and backend
+2. **Setup Backend**
 ```bash
-# Install backend dependencies
+cd Backend
 npm install
+cp .env.example .env
+# Update .env with your API keys
+```
 
-# Install frontend dependencies
-cd Client
+3. **Setup Frontend**
+```bash
+cd ../Client
 npm install
-cd ..
 ```
 
-3. Create environment files
+### Configuration
 
-Backend (.env):
-```
-GEMINI_API_KEY=your_gemini_api_key
-SERPAPI_API_KEY=your_serpapi_key
-APIFY_API_TOKEN=your_apify_token
-FIREBASE_SERVICE_ACCOUNT_BASE64=your_firebase_credentials_in_base64
-GOOGLE_API_KEY=your_google_api_key
-CLIENT_URL=http://localhost:5173
-```
+Create a `.env` file in the backend directory:
+```env
+# Firebase
+FIREBASE_API_KEY=your_firebase_key
+FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+FIREBASE_PROJECT_ID=your_project_id
+FIREBASE_STORAGE_BUCKET=your_storage_bucket
 
-FrontEnd (.env)
-```
-VITE_API_URL=http://localhost:3000/api
-```
+# AI Services
+GEMINI_API_KEY=your_gemini_key
+SERPAPI_KEY=your_serpapi_key
+APIFY_TOKEN=your_apify_token
 
-4. Create Firebase indexes
-   - Create a composite index for the `searches` collection:
-     - Fields: `userId` (ASC), `createdAt` (DESC)
-     - You can create this index using the URL provided in the error message when running the application for the first time, or through the Firebase console.
-
-### Running the Application
-1. Start the backend server
-```bash
-npm start
-# or for development
-npm run dev:backend
+# Server
+PORT=5000
+NODE_ENV=development
 ```
 
-2. Start the frontend development server
-```bash
-cd Client
-npm run dev
-# or from root directory
-npm run dev:frontend
-```
+## 🎯 How It Works
 
-3. Visit http://localhost:5173 in your browser
+1. User enters a job description or search query
+2. AI analyzes and extracts key requirements
+3. System performs comprehensive talent search
+4. LinkedIn profiles are enriched with detailed data
+5. Candidates are scored and ranked
+6. Personalized outreach messages are generated
+7. Results presented with actionable insights
 
-## Application Flow
-1. **User Authentication**: Users sign in using Firebase Authentication
-2. **Search Query**: Users enter a natural language query describing their talent needs
-3. **AI Processing**:
-   - The system translates the query into search parameters
-   - Executes multiple searches to find relevant candidates
-   - Scrapes detailed information from LinkedIn profiles
-   - Analyzes and scores candidates based on the requirements
-4. **Results**: Users view a list of candidates ranked by match score
-5. **Candidate Profiles**: Users can access detailed candidate profiles and suggested outreach messages
-6. **History**: Users can revisit past searches and their results
+## 📊 Key Metrics
 
+- **⭐ GitHub Stars**: 1
+- **👥 Contributors**: 3 (mugilankani, AlwinSunil, Anam-Ashraf7)
+- **📜 License**: MIT License
+- **🔧 Primary Language**: JavaScript (99.7%)
 
-## API Endpoints
-### Authentication
-- `POST /api/auth/login`: Authenticate a user
-- `POST /api/auth/register`: Register a new user
-### Candidate Search
-- `POST /api/candidates/search`: Start a new candidate search
-- `GET /api/candidates/search/status/:searchId`: Check the status of a search
-- `GET /api/candidates/search/history/:userId`: Get a user's search history
+## 🤝 Contributing
 
-## Project Structure
-```
-ScoutAI/
-├── Backend/
-│   ├── config/
-│   │   └── firebaseAdmin.js
-│   ├── controllers/
-│   │   └── hiringControllers.js
-│   ├── routes/
-│   │   ├── authRoutes.js
-│   │   ├── candidateRoutes.js
-│   │   ├── jsonRag.js
-│   │   └── suggestionRoutes.js
-│   ├── service/
-│   │   ├── agentParent.js
-│   │   ├── candidateScreener.js
-│   │   ├── linkedInScraper.js
-│   │   ├── multiPayloadGenerator.js
-│   │   ├── search.js
-│   │   └── suggestionForUserPrompt.js
-│   ├── firebase.js
-│   └── index.js
-├── Client/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── History.jsx
-│   │   │   ├── HomePage.jsx
-│   │   │   ├── LandingPage.jsx
-│   │   │   ├── Navbar.jsx
-│   │   │   ├── PersonProfile.jsx
-│   │   │   ├── ProtectedRoute.jsx
-│   │   │   ├── SearchResults.jsx
-│   │   │   ├── Settings.jsx
-│   │   │   └── TalentRow.jsx
-│   │   ├── context/
-│   │   │   └── AuthContext.jsx
-│   │   ├── App.jsx
-│   │   ├── axios.js
-│   │   ├── index.css
-│   │   └── main.jsx
-│   └── index.html
-├── package.json
-└── readme.md
-```
+Contributions are welcome! Please follow these guidelines:
 
-## Future Enhancements
-- **Local Database Integration**: Allow hiring teams to connect with their own database for candidate selection
-- **Advanced Background Checks**: Scrape information from across the internet to verify candidate details
-- **Enhanced Filtering**: Implement more granular filtering of candidates based on specific criteria
-- **Interview Scheduling**: Integrate with calendar systems for seamless interview scheduling
-- **Bulk Communication**: Send personalized outreach messages to multiple candidates simultaneously
-- **Candidate Tracking**: Monitor candidate interactions and track hiring progress
-- **Team Collaboration**: Enable teams to collaborate effectively on candidate searches
-- **ATS Integration**: Export candidate data to Applicant Tracking Systems and other HR platforms
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/YourFeature`)
+3. Commit changes (`git commit -m 'Add YourFeature'`)
+4. Push to the branch (`git push origin feature/YourFeature`)
+5. Open a Pull Request
 
+## 🔐 License
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the **MIT License** - see the LICENSE file for details.
 
+## 👥 Team
+
+- **Mugilan Sakthivel** ([@mugilankani](https://github.com/mugilankani)) - Lead Developer
+- **Alwin Sunil** ([@AlwinSunil](https://github.com/AlwinSunil)) - Contributor
+- **Anam Ashraf** ([@Anam-Ashraf7](https://github.com/Anam-Ashraf7)) - Contributor
+
+## 📞 Support & Contact
+
+- 🐛 Found a bug? [Open an issue](https://github.com/mugilan-sakthivel/ScoutAI/issues)
+- 💬 Questions? Reach out via GitHub Discussions
+- 💼 LinkedIn: [mugilansakthivel](https://linkedin.com/in/mugilansakthivel)
+
+## 🚀 Future Roadmap
+
+- [ ] Multi-language support for global candidate search
+- [ ] Advanced salary prediction models
+- [ ] Interview scheduling automation
+- [ ] Candidate pipeline management dashboard
+- [ ] Integration with popular ATS platforms
+- [ ] Custom scoring algorithms per organization
+- [ ] Advanced analytics and reporting
+
+---
+
+**Built with ❤️ by Mugilan Sakthivel**
+
+*Last Updated: November 14, 2025*
